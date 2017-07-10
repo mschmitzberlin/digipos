@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html>
+ <!-- Version 05.05.17 -->
+<head>
+    <meta charset="UTF-8">
+	<meta robots="noindex,nofollow,noarchive">
+	<title>Besuchsreport</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ 	
+	<meta http-equiv="cache-control" content="max-age=0">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="cache-control" content="no-store">
+	<meta http-equiv="cache-control" content="must-revalidate">
+	<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <meta http-equiv="expires" content="0">
+	<meta http-equiv="expires" content="Tue, 01 Jan 2013 12:00:00 GMT"> 
+	<meta name="viewport" content="initial-scale=1.0 user-scalable=0, width=device-width, height=device-height">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+-->
+   	<link rel="apple-touch-icon" href="img/Icon.jpg">
+
+    
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/application.css">
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/iscroll4.js" type="text/javascript" ></script>	
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>		
+	<script src="js/globals.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/lz-string.min.js" language="javascript"></script>
+	<script src="js/jstorage.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/md5-min.js" type="text/javascript" charset="utf-8"></script>	
+	<script src="js/functions.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/validate.js"  charset="utf-8"></script>
+	<script type="text/javascript" src="js/pwreset.js"  charset="utf-8"></script>	
+    <script type="text/javascript" src="js/application.js"  charset="utf-8"></script>
+	<style>
+		#protcolWarning {
+			text-align: left;
+			color: red;
+			font-size: 12px;
+		}
+		.float {
+			float: left;
+		}
+		
+	</style>
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="window active" id="loginForm">
+		<div class="page-header">
+			<div class="row row-eq-height">
+				<div class="col-sm-1 hidden-xs"></div>
+				<div class="col-sm-5 col-xs-12">
+					<h3>Besuchserfassung</h3></div>
+				<div class="col-sm-5 col-xs-12 col-center"><img src="img/logo.jpg" class="img-responsive center-block"></div>
+				<div class="col-sm-1 hidden-xs"></div>
+			</div>			
+		</div>
+		<div class="row">
+			<div class="col-sm-2 col-md-3"></div>
+			<div class="col-sm-8 col-md-6 dashbord-box">
+				<div class="row">
+					<p></p>
+					<div class="col-sm-1 col-md-2"></div>
+					<label for="username" class="col-sm-2 col-xs-5 control-label ">Benutzer:</label>
+					<div class="col-xs-7 col-sm-6 col-md-5">
+						<input type="text" class="form-control" id="username" value="admin">
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-sm-1 col-md-2"></div>
+					<label for="password" class="col-md-2 col-sm-2 col-xs-5 control-label">Passwort:</label>
+					<div class="col-xs-7 col-sm-6 col-md-5">
+						<input type="password" class="form-control" id="password" value="admin">
+					</div>
+				</div>
+		
+				<p></p>
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-10 text-center">
+						<strong>Bitte auf Gross / Kleinschreibung achten</strong>
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-xs-1 col-md-2"></div>
+					<div class="col-xs-5 col-md-4 text-center"> <button id="btnLogin" class="btn btn-danger btn-block ">Anmelden</button></div>
+					<div class="col-xs-5 col-md-4 text-center"> <button id="btnPwReset" class="btn btn-default btn-block ">Passwort zurücksetzen</button></div>
+				</div>
+				<p></p>
+			</div>
+		</div>
+	</div> <!--window loginForm-->
+	<div class="window" id="mainmenu">
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Navigation ein-/ausblenden</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a data-toggle="tab" href="#mainmenustart">Start</a></li>
+					<li id="navtour"><a data-toggle="tab" href="#mainmenutour">Touren</a></li>
+					<li id="navErfassen"><a data-toggle="tab" href="#mainmenuereport">Berichte</a></li>
+					<li id="navSonstiges"><a data-toggle="tab" href="#mainmenuesonstiges">Sonstiges</a></li>
+				</ul>
+				<button id="btnLogout" type="button" class="navbar-right btn btn-default navbar-btn">Abmelden</button>
+				<span  class="navbar-text navbar-right username">Angemeldet: <span id="currentUserName"></span></span>
+			</div>
+		</nav>
+		<div class="tab-content">
+			<div id="mainmenustart" class="tab-pane fade in active">
+				<div class="row dashbord">
+					<div class="col-xs-1 col-md-2"></div>
+					<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+						<div class="row">
+							<div class="col-xs-12">
+								<h3>Daten aktualisieren</h3>
+							</div>
+						</div>
+						<div class="dashbord-content">
+							<div class="row">
+								<div class="col-xs-12">
+									Letzte Aktualisierung am:<span id="lastUpdate"></span>
+								</div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-12">
+									<span id="admLoad" class="admingroup">
+										Touren aller HB für den <input type="text" name="admLoadDate" maxlength="10" size="10" class="formatdate"> laden
+									</span>
+								</div>
+							</div>
+			
+						</div>
+						<div class="dashbord-footer">
+							<div class="row">
+								<div class="col-xs-1 col-sm-2"></div>
+								<div class="col-xs-10 col-sm-8">
+									<button id="btnUpdate" type="button" class="btn btn-danger btn-block">Daten aktualisieren</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+						<div class="row">
+							<div class="col-xs-12">
+								<h3>Erfasste Daten</h3>
+							</div>
+						</div>
+						<div class="dashbord-content">										
+							<div class="row">
+								<div class="col-xs-12">
+									<h4>Lokal gespeicherte Formulare: <span id= "countStored"></span></h4>
+									<p><span id="offlStoreMsg"></span></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12"><span id="transfertext"></span></div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12"><span id="transferstatus">&nbsp;</span></div>
+							</div>								
+							
+						</div>
+						<div class="dashbord-footer">		
+							<div class="row">
+								<div class="col-xs-1 col-sm-2"></div>
+								<div class="col-xs-10 col-sm-8">
+									<button id="btnStoreData" class="btn btn-danger btn-block">Erfasste Daten übertragen</button>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>	<!--1. dashborad -->
+				<div class="row dashbord">
+					<div class="col-xs-1 col-md-2"></div>
+					<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<h3>Touren verwalten</h3>
+							</div>
+						</div>
+						<div class="dashbord-content">
+							<div class="row">
+								<div class="col-xs-12">
+									gespeicherte Tour:
+									<p><b> <span id="currentTourName"></span></b></p>
+								</div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-6">
+									<button type="button" class="btn btn-default btn-block" onclick="showWindow('plistewindow');">Packliste</button>
+								</div>
+							</div>
+							<p></p>									
+						</div>
+						<div class="dashbord-footer">
+							<div class="row">
+								<div class="col-xs-1 col-sm-2"></div>
+								<div class="col-xs-10 col-sm-8">
+									<button type="button" class="btn btn-danger btn-block" onclick="$('#navtour a').click();">Touren verwalten</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+						<div class="row">
+							<div class="col-xs-12">
+								<h3>Besuchsberichte</h3>
+							</div>
+						</div>
+						<div class="dashbord-content">
+							<div class="row">
+								<div class="col-xs-2"><img src="img/red.png"></div>
+								<div class="col-xs-8">Nicht erfasste Berichte:</div>
+								<div class="col-xs-2"><span id="countRed"></span></div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-md-2 col-xs-2"><img src="img/yellow.png"></div>
+								<div class="col-md-8 col-xs-8">Nicht vollständig erfasst:</div>
+								<div class="col-md-2 col-xs-2"><span id="countYellow"></span></div>										
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-md-2 col-xs-2"><img src="img/green.png"></div>
+								<div class="col-md-8 col-xs-8">Vollständig erfasst:</div>
+								<div class="col-md-2 col-xs-2"><span id="countGreen"></span></div>										
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-md-2 col-xs-2"><img src="img/blue.png"></div>
+								<div class="col-md-8 col-xs-8">Exportierte Besuchsberichte:</div>
+								<div class="col-md-2 col-xs-2"><span id="countBlue"></span></div>											
+							</div>									
+						</div>
+						<div class="dashbord-footer">
+							<div class="row">
+								<div class="col-xs-1 col-sm-2"></div>
+								<div class="col-xs-10 col-sm-8">
+									<button type="button" class="btn btn-danger btn-block" onclick="$('#navErfassen a').click();">Besuchsberichte erfassen</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	<!--2. dashborad -->
+				<div class="row dashbord">
+					<div class="col-xs-1 col-md-2"></div>
+					<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+						<div class="row">
+							<div class="col-xs-12">
+								<h3>Sonstiges</h3>
+							</div>
+						</div>							
+						<div class="dashbord-content">
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<button type="button" class="btn btn-danger btn-block" onclick="$('#navSonstiges a').click();">Dokumente</button>
+								</div>
+								<div class="col-xs-2"></div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<button type="button" class="btn btn-danger btn-block" onclick="$('#navSonstiges a').click();">Programmbeschreibung</button>
+								</div>
+								<div class="col-xs-2"></div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<button type="button" class="btn btn-danger btn-block" id="btnStatus" onclick="$('#navSonstiges a').click();">Logdatei</button>
+								</div>
+								<div class="col-xs-2"></div>
+							</div>									
+						</div>
+						<div class="dashbord-footer"></div>
+					</div>
+					<div class="col-md-4 col-xs-5 dashbord-box">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<h3>Systeminfos</h3>
+							</div>
+						</div>
+						<div class="dashbord-content">
+							<div class="row">
+							<span id="offlStoreMsgs"></span>
+								<div class=" col-xs-12">Versionsnummern (müssen übereinstimmen!)</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1 col-md-2 "></div>
+								<div class="col-xs-2">Lokal:</div>
+								<div class="col-xs-8"><span id="intVersion"></span></div>											
+							</div>
+							<div class="row">
+								<div class="col-xs-1 col-md-2"></div>
+								<div class="col-xs-2">Server:</div>
+								<div class="col-xs-8"><span id="serverVersion"></span></div>											
+							</div>	
+							<div class="row">
+								<div class="col-xs-12 col-md-6">Letztes Programmupdate:</div>
+								<div class="col-xs-12 col-md-6"><span id="prgUpdate"></span></div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 col-md-6">Cache zurückgesetzt:</div>
+								<div class="col-xs-12 col-sm-6"><span id="cacheUpdate"></span></div>
+							</div>							
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">Verfügbarer Speicher:</div>
+								<div class="col-xs-12 col-sm-6"><span id="maxlocalsize"></span></div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="progress">
+									  <div id ="memoryprogress" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+									  aria-valuemin="0" aria-valuemax="100" style="width:50%">
+										50% Complete (info)
+									  </div>
+									</div>
+								</div>
+							</div>							
+						
+						</div>
+						<div class="dashbord-footer">		
+							<div class="row">
+								<div class="col-md-2 col-sm-2"></div>
+								<div class="col-md-8 col-sm-8">
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div> <!--3. dashborad -->
+			</div> <!--tab-content mainmenustart-->
+			<div id="mainmenutour" class="tab-pane fade in">
+				<div class="container-box" data-height="100">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="pill" href="#menutourload">Tour laden</a></li>
+						<li><a data-toggle="pill" href="#menutourcreate">Tour zusammenstellen</a></li>
+					</ul>
+				
+					<div class="tab-content">
+						<div id="menutourload" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Tour auswählen</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<div class="well-sm">
+										<div id="tourlistscroll" class="scroller" data-height="100">
+											<div id="tourlist" data-idname="tourid" class="list-group"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-xs-3"></div>
+								<div class="col-md-6 col-xs-6">
+									<span id="offlTourMsg"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnDelTour" type="button" class="btn btn-danger btn-block">Tour löschen</button>
+								</div>
+								<div class="col-xs-6"></div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnStoreTour" type="button" class="btn btn-danger btn-block">Tour speichern</button>
+								</div>
+							</div>
+							<!--	</div>-->
+				
+						</div>
+						<div id="menutourcreate" class="tab-pane fade">
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Tour zusammenstellen</h4>
+								</div>
+							</div>							
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-4">
+									<label for="txtSearchManu" class="control-label ">Bitte EPA-Nummer, Name oder Strasse eingeben:</label>
+								</div>
+								<div class="col-xs-4">
+									<input type="text" class="form-control" id="txtSearchManu">
+								</div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnSearchManu" type="button" class="btn btn-danger btn-block">Suchen</button>
+								</div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<p>Gefundene Einträge:<span id="tourmanucount"></span> Mit Klick auf <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> den Eintrag zur Tourenliste hinzufügen</p>
+								</div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<div class="well-sm">
+										<div id="customlistmanuscroll"  class="scroller" data-height="50">
+											<div id="customlistmanu" class="list-group"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<p></p>
+									<p>zusammengestellte Tourenliste, mit Klick auf <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> den Eintrag aus der Tourenliste entfernen</p>
+								</div>
+							</div>								
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+								<div class="well-sm">
+									<div id="tourlistmanuscroll"  class="scroller" data-height="50">
+										<div id="tourlistmanu" class="list-group"></div>
+									</div>
+									</div>	
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-8 col-md-9"></div>
+								<div class="col-xs-4 col-md-2">
+									<button id="btnStoreTourManu" type="button" class="btn btn-danger btn-block">Tour zusammenstellen</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div> <!--tab-content mainmenutour-->
+			<div id="mainmenuereport" class="tab-pane fade in">
+				<div class="container-box">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="pill" href="#menuereporterfassen">Bericht erfassen</a></li>
+						<li><a data-toggle="pill" href="#menuereportprint">Bericht drucken</a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="menuereporterfassen" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Besuchsbericht auswählen</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<div class="well-sm">
+										<div id="formlistscroll" class="scroller" data-height="20">
+											<div id="formlist" class="list-group"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Kunde auswählen</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<div class="well-sm">
+										<div id="customlistscroll" class="scroller" data-height="80">
+											<div id="customlist" class="list-group"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-7 col-md-8"></div>
+								<div class="col-xs-4 col-md-3">
+									<button id="btnCreate" type="button" class="btn btn-danger btn-block">Besuchsbericht erfassen</button>
+								</div>
+							</div>
+						</div>	<!--tab-pane  menuereporterfassen-->
+						<div id="menuereportprint" class="tab-pane fade in">
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Besuchsbericht nachdrucken</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-2">
+									<label for="txtPrintEPA" class="control-label ">EPA-Nummer eingeben:</label>
+								</div>
+								
+								<div class="col-xs-3">
+									<input type="text" class="form-control" id="txtPrintEPA">
+								</div>
+								<div class="col-md-1 hidden-xs hidden-sm"></div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnPrintEPASearch" type="button" class="btn btn-danger btn-block">EPA suchen</button>
+								</div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnResetPrintEPAList" type="button" class="btn btn-danger btn-block">Suche löschen</button>
+									<p></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<div class="well-sm">
+										<div id="epasearchlistscroll" class="scroller" data-height="50">
+											<div id="epasearchlist" class="list-group"></div>
+										</div>
+									</div>
+									<p></p>
+								</div>
+							</div>							
+							<div class="row">							
+								<div class="col-xs-9"></div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnPrintEPA" type="button" class="btn btn-danger btn-block">Vorschau</button>
+									<p></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Blankobogen drucken</h4>
+								</div>
+							</div>							
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-2">
+									<div class="checkbox">
+										<label><input type="checkbox" id="blankoBB" class="blankodruck"> Basisbogen</label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-3">Huckepackbesuche</div>
+								<div class="col-xs-8">
+									<div id="blankoHP" class="blankodruck"></div>
+									<p></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-2">
+									<label for="blankoAB" class="control-label ">Aktionsbesuche</label>
+								</div>
+								<div class="col-xs-3">
+									<select id="blankoAB" class="blankodruck"></select>
+									<p></p>
+								</div>
+							</div>							
+							<div class="row">
+								<div class="col-xs-7 col-sm-6"></div>
+								<div class="col-xs-3 col-sm-2">
+									<div class="superusergroup">
+										<button id="btnTestForm" type="button" class="btn btn-danger btn-block">Bogen testen</button>
+									</div>									
+								</div>								
+								<div class="col-xs-2 col-sm-3">
+									<button id="btnPrintPreview" type="button" class="btn btn-danger btn-block">Bogen Vorschau</button>
+								</div>
+							</div>												
+						</div>
+					</div> <!--tab-content -->
+				</div> <!--container-box-->
+			</div> <!--tab-content mainmenuerfassen-->
+			<div id="mainmenuesonstiges" class="tab-pane fade in">
+				<div class="container-box">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="pill" href="#menuesonstigesdocs">Dokumente</a></li>
+						<li><a data-toggle="pill" href="#menuesonstigeshelp">Programmbeschreibung</a></li>
+					</ul>
+				
+					<div class="tab-content">
+						<div id="menuesonstigesdocs" class="tab-pane fade in active">
+							<div class="row">
+								<div class="col-md-1 col-xs-6"></div>
+								<div class="col-md-10 col-xs-6">
+									<h4>Dokument auswählen</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1 col-xs-6"></div>
+								<div class="col-md-10 col-xs-6">
+									<div class="well-sm">
+										<div id="doclistscroll" class="scroller" data-height="50">
+											<div id="doclist" class="list-group"></div>
+										</div>
+									</div>
+									<p></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1 col-xs-6"></div>
+								<div class="col-md-2 col-xs-6">
+									<a id="extDocLink" class="vvbutton alignleft" href="#" target="_blank">Offline speichern</a>
+								</div>
+								<div class="col-md-6 col-xs-6"></div>
+								<div class="col-md-2 col-xs-6">
+									<button id="btnDocs" type="button" class="btn btn-danger btn-block">Dokument anzeigen</button>
+								</div>
+								
+							</div>							
+												
+							
+						</div> <!--menuesonstigesdocs-->
+						<div id="menuesonstigeshelp" class="tab-pane fade in active">
+							
+						</div> <!--menuesonstigeshelp-->
+					</div><!--tab-content-->
+				</div><!--container-box-->
+				
+			</div><!--tab-content mainmenusonstiges-->
+			
+		</div> <!--tab-content-->
+	</div> <!--window mainmenu-->
+	<div class="window" id="inputForm">
+		<nav class="navbar navbar-default">
+			<div id="navbar2" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav"></ul>
+				<span class="navbar-text navbar-right username">Angemeldet: </span>
+			</div>
+        </nav>
+		
+		<div class="container-box">
+			<div class="row">
+				<div class="well-sm">
+					<div id="formcontainerscroll" class="scroller" data-height="100">
+						<div id="formContainer"></div>
+					</div>							
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<button type="button" id="btnSend" type="button" class="btn btn-success">Speichern</button>
+					<button type="button" id="btnCancel" class="btn btn-danger">Abbrechen</button>
+					<button type="button" id="btnGeoCoord" class="btn btn-primary">Koordinaten speichern</button>
+					<button type="button" id="btnFIdsInOut" class="btn btn-primary" style="display:none">Feld Id an / aus</button>
+					<button type="button" id="btnCollect" class="btn btn-danger" style="display:none"><< Zurück</button>
+					<button type="button" id="btnEdit" class="btn btn-default" style="display:none">Besuchsbericht bearbeiten</button>
+					<button type="button" id="btnPrintFilledPreview" class="btn btn-default" style="display:none">Besuchsbericht drucken</button>
+					<button type="button" id="btnDel" class="btn btn-default" style="display:none">Besuchsbericht löschen</button>
+				</div>
+			</div>
+		</div>
+	</div> <!--window inputForm-->
+	
+
+</div> <!-- container-fluid -->
+<div id ="dlgPrint" class="modal iframe" tabindex="-1" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Druckvorschau</h4>
+				</div>
+				<div class="modal-body">
+					<div class="embed-iframe">
+						<iframe src="print.html" id="framePrint"></iframe>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" id="btnPrint">Drucken</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+				</div>			
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	
+<div id ="iframeForm" class="modal iframe" tabindex="-1" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Dokument anzeigen</h4>
+				</div>
+				<div class="modal-body">
+					<div class="embed-iframe">
+						<iframe src="" width="100%" height="100%"></iframe>
+					</div>					
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+				</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	            
+<div id="waitModal" class="modal overlay_wait" tabindex="-1" role="dialog" data-backdrop="static" style="display: block; ">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+
+					<div class="modal-body inner">
+						<img src="img/wait.gif" class="img-responsive center-block">
+						<p></p>
+<!--						<div class="progress">
+							<div id="progressbar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+								<span class="sr-only">40% Complete (success)</span>
+							</div>
+						</div>	-->					
+						<div id="progressinfo"></div>
+						<div id="progressbar_outer"><div id="progressbar" style="width: 0%; "></div></div>
+					</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+<!--		<div class="overlay_wait">
+		    <div class="inner">
+           		<img src="img/wait.gif">
+                <div><span id="progress"></span></div>
+				<div id="progressbar_outer"><div id="progressbar"></div></div>
+			</div>
+		</div>-->
+
+				
+			</div>
+		</div>
+
+
+			
+			
+			<div>
+			<div class="content">
+			
+
+				<h2 class="header">Besuchsbericht erfassen</h2>
+				<div class="container-box">
+					<p><b><span id="reportprogress"></span></b></p>
+					<a name="menuBtn" class="vvbutton alignright" href="#selectForm">Besuchsbericht erfassen</a>
+					<br class="clear">
+				</div>
+				<h2 class="header">Dokumente</h2>
+				<div class="container-box">
+					<a name="menuBtn" class="vvbutton alignright" href="#docsForm">Dokumente</a>
+					<br class="clear">
+				</div>
+				<div class="container-box">
+					<input type="button" id="btnStatus" class="vvbutton alignleft" value="Logdatei einsehen">
+					<a name="menuBtn" class="vvbutton alignright" href="#help">Programmbeschreibung</a>
+					<br class="clear">
+				</div>
+			</div> <!-- content -->
+		</div> <!-- window -->
+	
+
+		
+		<div class="window" id="selectForm" style="display:none">
+            <header>
+                 <a href="#MainMenu" class="back" name="back">Zurück</a>
+				Besuchsbericht erfassen
+			</header>
+			<div class="content">
+                <div class="container-box">
+                    <div id="formmenu">
+
+
+					</div>
+				</div>
+                <div class="container-box">
+
+				</div>
+				<div class="container-box">   					
+					<div id="custommenu">
+                        <h3>Kunde auswählen</h3>
+                        
+                        <ul class="depth-1 edit">
+                            <li><input type="text" id="txtSearchList"></li>
+                        </ul>
+                        
+                        <input type="button" id="btnListBackward" class="vvbutton alignleft" value="<" style="display: none">
+                        <input type="button" id="btnListForeward" class="vvbutton alignright" value=">" style="display: none">
+                        <p class="message center serif">Bitte geben Sie Kundennummer, Name oder Strasse ein.</p>
+						<p class="message right">Umkreis - Eh</p>
+                        <ul id="customlist" class="checkable depth-1">
+							
+                        </ul>
+			<h3>Umkreis - EH <span id="ukrlistCount"></span></h3>
+			 <ul id="ukrlist" class="checkable depth-1">
+			
+                    </div>
+                
+                    <span id="selFormInfo" class="hidden"></span>
+                    <span id="selCustomInfo" class="hidden"></span>
+                    <form id="frmCreate">
+                        <input type="hidden" id="txtCreateFormId" name="formid">
+                        <input type="hidden" id="txtCreateCustomId" name = "customid">
+                        <input type="hidden" id="txtCreateFormValId" name = "formvalid">
+                    </form>
+					<p>
+						<a name="menuBtn" class="vvbutton alignleft" href="#wmForm" id="btnwmForm">WM - Wünsche</a>
+						
+					</p>
+					<br class="clear">
+					<div class="restore admingroup">
+						<input type="checkbox" id="cbRestore"> Daten aus Sicherung laden
+					</div>
+                    <div id="legende">
+                        <p><img src="img/red.png"> = noch keine Erfassung</p>
+                        <p><img src="img/yellow.png"> = Besuchsbericht wurde erfasst und lokal gespeichert - nicht alle Bereiche wurden als bearbeitet markiert. Bearbeitung noch möglich</p>
+                        <p><img src="img/green.png"> = Besuchsbericht wurde erfasst und lokal gespeichert - alle Bereiche wurden als bearbeitet markiert. Bearbeitung noch möglich</p>
+                        <p><img src="img/blue.png"> = Besuchsbericht wurde online gespeichert - eine Bearbeitung ist nicht mehr möglich</p>
+						<p><img src="img/gray.png"> = Besuchsbericht wurde einer anderen Tour zugeordnet, für Erfassung gesperrt</p>
+                    </div>
+                    <br class="clear">
+					
+                </div><!-- .container-box -->
+            </div>
+		</div>			
+		
+		<div class="window" id="inputForm" style="display:none">
+			<header>
+            	<span id="customerName"></span>
+			</header>
+			
+			<div class="content">
+				<div id="erf-wrapper">
+					<div id="formContainer" class="container-box"></div>
+				</div><!-- #erf-wrapper -->
+			</div>
+			<div class="footer">
+            </div>
+	
+		</div><!-- #inputForm -->
+		
+		<div class="window" id="wmForm" style="display:none">
+            <header>
+                 <a href="#selectForm" class="back" name="back">Zurück</a>
+				Werbemittel - Wünsche
+			</header>			
+			<div class="content">
+				<div class="container-box">
+						<table id="wm_header">
+							<tr>
+								<td class="th" colspan="4">Bestellung</td>
+							</tr>
+							<tr>
+								<td>Bestellnummer:</td>
+								<td><span name="bestellnummer"></span></td>
+								<td>Kampagne:</td>
+								<td><span name="kp"></span></td>
+							</tr>
+							<tr>
+								<td>Datum:</td>
+								<td><span name="datum"></span></td>
+								<td>Tour:</td>
+								<td><span name="tour_nr"></span></td>
+							</tr>
+							<tr>
+								<td class="th" colspan="4">Empfänger</td>
+							</tr>
+							<tr>
+								<td>EPA-Nummer:</td>
+								<td colspan="2">Adresse:</td>
+								<td>G-Art:</td>
+							</tr>
+							<tr>
+								<td><span name="epa"></span></td>
+								<td colspan="2"><span name="adresse"></span></td>
+								<td><span name="gart"></span></td>							
+							</tr>						
+						</table>
+					<table id="wm_bestellliste" class="wm_bestellliste">
+						<tr>
+							<td class="th" colspan="3">Bestelliste</td>
+						</tr>
+						<tr>
+							<td class="th">Artikelnummer</td>
+							<td class="th">Bezeichnung</td>
+							<td class="th">Menge</td>
+						</tr>
+					</table>
+					<br class="clear">
+				</div>
+		
+			</div> <!-- content -->
+		</div><!-- #wmForm -->
+	
+		<div class="window" id="pwPackliste" style="display:none">
+			<header>
+			    <a href="#MainMenu" class="back" name="back">Zurück</a>
+			    Packliste Werbemittel
+			</header>
+            <div class="content">
+                <div class="container-box">
+
+					<table id="pw_tblPlInfo">
+						<tr>
+							<td class="th" colspan="3">Diese Informationen dienen nur
+					  zur Unterstützung für die Mitnahme von Werbemitteln !!!</td>
+						</tr>
+						<tr>
+							<td class="th">Infomaterial</td>
+							<td class="th" colspan="2">Anzahl</td>
+						</tr>
+						<tr>
+							<td class="left">fragm. EH</td>
+							<td colspan=2><span name ="pl_istpotenzial_feh"></span></td>
+						</tr>
+						<tr>
+							<td class="left">LEH</td>
+							<td colspan=2><span name ="pl_istpotenzial_leh"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Händlerzugabe</td>
+							<td class="th" colspan=2>Anzahl</td>
+						</tr>
+						<tr>
+							<td class="left">Händlerzugabe 1</td>
+							<td colspan=2><span name ="pl_anz_besuche_1"></span></td>
+						</tr>
+						<tr>
+							<td class="left">Händlerzugabe 2</td>
+							<td colspan=2><span name ="pl_anz_besuche_2"></span></td>
+						</tr>
+						<tr>
+							<td class="left">Händlerzugabe 3</td>
+							<td colspan=2><span name ="pl_anz_besuche_3"></span></td>
+						</tr>
+						<tr>
+							<td class="left">Händlerzugabe 4</td>
+							<td colspan=2><span name ="pl_anz_besuche_4"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Sonntagshändler</td>
+							<td class="th" colspan=2>Anzahl</td>
+						</tr>
+						<tr>
+							<td class="left">Händler hat sonntags geöffnet</td>
+							<td colspan=2><span name ="pl_istpotenzial_bams"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Regalschalen</td>
+							<td class="th">Potenzial beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">100 - Regalschale BILD der FRAU</td>
+							<td><span name ="pl_istpotenzial_rsbdf"></span></td>
+							<td><span name ="590 6209"></span></td>
+						</tr>
+						<tr>
+							<td class="left">101 - Regalschale AUTO BILD</td>
+							<td><span name ="pl_istpotenzial_rsaubi"></span></td>
+							<td><span name ="581 6215"></span></td>
+						</tr>
+						<tr>
+							<td class="left">104 - Regalschale SPORT BILD</td>
+							<td><span name ="pl_istpotenzial_rsspobi"></span></td>
+							<td><span name ="939 6218"></span></td>
+						</tr>
+						<tr>
+							<td class="left">102 - Regalschale Thekenständer BILD der
+					  FRAU</td>
+							<td><span name ="pl_istpotenzial_tsrsbdf"></span></td>
+							<td><span name ="6425"></span></td>
+						</tr>
+						<tr>
+							<td class="left">103 - Regalschale Thekenständer AUTO
+					  BILD</td>
+							<td><span name ="pl_istpotenzial_tsrsaubi"></span></td>
+							<td><span name ="6431"></span></td>
+						</tr>
+						<tr>
+							<td class="left">105 - Regalschale Thekenständer SPORT BILD</td>
+							<td><span name ="pl_istpotenzial_tsrsspobi"></span></td>
+							<td><span name ="6661"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Top Titel Finder</td>
+							<td class="th">Potenzial beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">121- Top Titel Finder BILD der  FRAU</td>
+							<td><span name ="pl_istpotenzial_ttfbdf"></span></td>
+							<td><span name ="973"></span></td>
+						</tr>
+						<tr>
+							<td class="left">122 - Top Titel Finder HÖRZU<td><span name ="pl_istpotenzial_ttfhz"></span></td>
+							<td><span name ="994"></span></td>
+						</tr>
+						<tr>
+							<td class="left">124 - Top Titel Finder AUTO BILD</td>
+							<td><span name ="pl_istpotenzial_ttfaubi"></span></td>
+							<td><span name ="965"></td>
+						</tr>
+						<tr>
+							<td class="left">125 - Top Titel Finder SPORT BILD</td>
+							<td><span name ="pl_istpotenzial_ttfspobi"></span></td>
+							<td><span name ="1004"></td>
+						</tr>
+						<tr>
+							<td class="left">126 - Top Titel Finder HÖRZU Wissen</td>
+							<td><span name ="pl_istpotenzial_ttfhzw"></span></td>
+							<td><span name ="999"></td>
+						</tr>
+						<tr>
+							<td class="left">128 - Top Titel Finder TV DIGITAL</td>
+							<td><span name ="pl_istpotenzial_ttftvd"></span></td>
+							<td><span name ="1009"></span></td>
+						</tr>
+						<tr>
+							<td class="left">129 - Top Titel Finder COMPUTER BILD</td>
+							<td><span name ="pl_istpotenzial_ttfcobi"></span></td>
+							<td><span name ="981"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Doppelangebotsbrücken</td>
+							<td class="th">Potenzial beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">Doppelangebotsbrücke HÖRZU</td>
+							<td><span name ="pl_istpotenzial_dabhz"></span></td>
+							<td><span name ="915"></span></td>
+						</tr>
+						<tr>
+							<td class="left">Doppelangebotsbrücke FUNK UHR</td>
+							<td><span name ="pl_istpotenzial_dabfu"></span></td>
+							<td><span name ="912"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Schlagzeilenträger BILD</td>
+							<td class="th">Anzahl beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">geeignete Geschäftsarten</td>
+							<td><span name ="pl_istpotenzial_sztbild"></span></td>
+							<td><span name ="6094"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Top Titel Finder BILD</td>
+							<td class="th">Anzahl beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">geeignete Geschäftsarten</td>
+							<td><span name ="pl_istpotenzial_ttfbild"></span></td>
+							<td><span name ="7131"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Kassen - Standdisplay BILD</td>
+							<td class="th">Anzahl beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">geeignete Geschäftsarten</td>
+							<td><span name ="pl_istpotenzial_ksdbild"></span></td>
+							<td><span name ="6181"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Regalordnungsdisplay BILD</td>
+							<td class="th">Anzahl beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">geeignete Geschäftsarten</td>
+							<td><span name ="pl_istpotenzial_rob"></span></td>
+							<td><span name ="903"></span></td>
+						</tr>
+						<tr>
+							<td class="th">Regalordnungsdisplay hoch BILD</td>
+							<td class="th">Anzahl beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">geeignete Geschäftsarten</td>
+							<td><span name ="pl_istpotenzial_rohb"></span></td>
+							<td><span name ="6592"></span></td>
+						</tr>
+							<td class="th">BILD Tabloid</td>
+							<td class="th">Anzahl beim EH möglich</td>
+							<td class="th">davon schon vorhanden</td>
+						</tr>
+						<tr>
+							<td class="left">Regalschalen BILD Tabloid</td>
+							<td><span name ="pl_istpotenzial_bildcrs"></span></td>
+							<td><span name ="6555"></span></td>
+						</tr>
+						<tr>							
+							<td class="left">TTF BILD Tabloid</td>
+							<td><span name ="pl_istpotenzial_bildcttf"></span></td>
+							<td><span name ="6561"></span></td>
+						</tr>						
+					</table>
+					<br class="clear">		
+				</div>
+            </div>
+		</div><!-- #wmForm -->
+		
+
+		
+
+		
+
+		<div class="window" id="prgstatus" style="display:none">
+			<header>
+				<a href="#MainMenu" class="back" name="back">Zurück</a>
+			    Logdatei
+			</header>
+			<div class="content">
+				<div class="container-box admingroup">
+					<div id="prglogging">
+					</div>
+					<br class="clear">
+				</div>
+				<div class="container-box">
+					<div id="prgcomprlogging" class="admingroup">
+					</div>
+					<br class="clear">
+				</div>
+				
+				<div class="container-box">
+					Programmstatus
+					<table>
+						<tr>
+							<td>Interne Version</td>
+							<td><span id="statusintversion"></span></td>
+							<td>Server Version</td>
+							<td><span id="statusserverversion"></span></td>
+						</tr>
+						<tr>
+							<td>Letztes Update:</td>
+							<td><span id="statuslastupdate"></span></td>
+							<td>Cache geleert:</td>
+							<td><span id="statuscacheupdate"></span></td>
+						</tr>
+						<tr>
+							<td>Browser </td>
+							<td colspan="3"><span id="statusbrowser"></span></td>
+						</tr>
+						<tr>
+							<td>Belegter Speicher:</td>
+							<td><span id="statusmemory"></span></td>
+							<td>Einträge in Logdatei:</td>
+							<td><span id="statuscountlog"></span></td>
+						</tr>
+						
+						
+						
+						
+					</table>
+					<br class="clear">
+				</div>				
+			</div>
+		</div><!-- #status -->
+		
+		
+		<div class="window" id="help" style="display:none">
+			<header>
+				<a href="#MainMenu" class="back" name="back">Zurück</a>
+			    Programmbeschreibung
+			</header>
+			<div class="content">
+				<div class="container-box">
+					<h3>Daten aktualisieren</h3>
+						<div>
+							<p>Nach dem Login besteht der erste Schritt darin, Daten vom Server lokal auf dem Gerät zu speichern. Dazu dient der Button "Daten aktualisieren".</p>
+							<p>Hierbei werden Formulare und Tourendaten aktualisiert. Eine Aktualisierung ist immer dann notwendig, wenn die Applikation erstmalig auf einem Gerät gestartet wird
+							und sollte idealerweise einmal am Tag laufen.</p>
+						</div>
+						<h3>Erfasste Daten übertragen</h3>
+						<div>
+							<p>Erfasste Besuchsberichte werden lokal auf dem Gerät gespeichert und können - falls nötig - nachbearbeitet und korrigiert werden.
+							Das Speichern der Daten auf dem Server erfolgt über den Schalter "erfasste Daten übertragen". Die Übertragung kann im Prinzip nach jeder Erfassung erfolgen oder auch 
+							komplett einmal am Tag.</p>
+							<p>Wenn die Daten sofort nach der Erfassung übertragen werden, können die Besuchsberichte nicht mehr nachbearbeitet werden und die Statusanzeige in der Kundenliste färbt sich blau.
+							Dafür ist diese Variante sicherer gegenüber eventuellem Datenverlust, der z.B. bei Löschen des Browsercaches auftreten kann.
+							Sollte die Übertragung nur einmal komplett erfolgen, dann ist bis zu diesem Zeitpunkt eine Nachbearbeitung der erfassten Berichte noch möglich (Statusanzeige ist grün oder gelb).
+							Falls allerdings eine Nachbearbeitung nicht notwendig ist, sollten die Berichte mehrmals am Tag - idealerweise nach der Erfassung - übertragen werden.
+							Es werden Berichte mit Status grün und gelb übertragen!</p>
+							<p>Der Übertragungsvorgang kann nur bei einer Internetverbindung erfolgen. Sind mehrere Besuchsberichte vorhanden, wird jeder Bericht einzeln übertragen 
+							und anschließend geprüft, ob der Speichervorgang erfolgreich war - erst danach wird der gerade übertragene Besuchsbericht lokal gelöscht.
+							Somit wird gewährleistet, dass im Falle eines Abbruches der Internetverbindung keine Daten verloren gehen und auf dem Gerät lokal gespeichert bleiben</p>
+						</div>
+		
+					<h3>Touren verwalten</h3>
+						<div>
+							<p>Die Besuche und Erfassung von Bögen ist tourenweise ausgerichtet. 
+							Deshalb ist es für eine Erfassung notwendig, eine Tour „offline“ zu speichern. Nach der Datenaktualisierung kann
+							hier die Tour ausgewählt werden, die besucht werden soll. Diese Tour wird auf
+							dem Gerät gespeichert (Schalter "Daten der Tour speichern"). Bei diesem Vorgang werden alle zur Tour gehörigen Kunden geladen und die Kundenliste im Menü
+							"Besuchsbericht erfassen" wird aktualisiert.</p>
+						</div>
+					<h3 style="display: none">Tour zusammenstellen</h3>
+						<div style="display: none">
+							<p>Alternativ kann auch eine eigene Tour zusammengestellt werden. Dazu kann ein eingrenzender Suchbegriff - ein Teil eines Namens einer Straße
+							oder auch die Kundennummer eingegeben werden. Nach Klick auf Suchen werden alle gefundenen Einträge angezeigt. So erscheinen z.B. bei Eingabe von
+							Meier alle Kunden in der Liste, deren Namen den Teil Meier beinhalten oder auch, wenn in deren Adresse der Teil Meier vorkommt.
+							Durch Klick auf "Eintrag hinzufügen" wird die eigene Tour zusammengestellt. Dabei kann die Suche beliebig oft wiederholt werden,
+							die bereits aufgenommenen Einträge bleiben erhalten. Klick auf "Eintrag entfernen" löscht den aktuell markierten Eintrag.
+							Sind alle Kunden aufgenommen, kann nun die zusammengestellte Tour „offline“ gespeichert werden. Um eine Tour individuell zusammenzustellen,
+							muss eine Online-Verbindung bestehen. </p>
+							Werbemittel Touren
+						</div>
+					<h3>Werbemittel-Tour zusammenstellen</h3>
+						<div>
+							<p>Werbemittel – Besuche werden wie eine Tour behandelt. Diese Touren erscheinen  nicht
+							automatisch sondern können manuell zusammengestellt werden. Nach Eingabe der EPA-Nummer und
+							Klick auf "Suchen" wird die Adresse des WM-Kunden eingeblendet. Durch Klick auf "Eintrag
+							hinzufügen" wird der Kunde in die Tourliste aufgenommen. Die Suche kann beliebig oft mit verschiednen EPA-Nummern wiederholt
+							werden, die bereits aufgenommenen Einträge bleiben erhalten. Klick auf "Eintrag entfernen"
+							löscht den aktuell markierten Eintrag. Sind alle Kunden aufgenommen, kann nun die
+							zusammengestellte Werbemittel - Tour „offline“ gespeichert werden. Um eine WM - Tour
+							zusammenzustellen, muss eine Online-Verbindung bestehen.</p>
+							<p>Werbemittel-Touren können wie herkömmliche Touren erfasst werden. 
+							Sollte ein EH auf einer WM-Tour sich ebenfalls auf einer herkömmlichen Tour befinden, dann wird auf dieser Tour der EH als erfasst gekennzeichnet, um
+							eine unnötige doppelte Erfassung auszuschließen. Die Kennzeichnung erfolgt erst nach Übertragen der erfassten Daten! ("Schalter erfasste Daten übertragen")  </p>
+							<p>WM - Wunschliste </p>
+							<p>	Nachdem die Tour zusammengestellt und offline gespeichert wurde, blendet sich automatisch
+							im Hauptmenü, Bereich "Touren verwalten" ein neuer Schalter "WM – Wünsche" ein. Nach Klick
+							auf den Schalter öffnet sich eine Liste, in der Detailangaben des oder der zu besuchenden
+							Kunden sowie deren WM – Wünsche enthalten sind.</p>
+							<p>WM – Erfassung</p>
+							<p>Im Besuchsbericht wird automatisch ein weiterer Erfassungsbereich "EH – Werbemittel – Lieferung" 
+							eingeblendet. Hier sind eventuelle Bemerkungen sowie die Ist-Menge pro WM zu erfassen.</p>
+							<p>WM – Tour  löschen.</p>
+							<p>Sollte versehentlich eine WM Tour erstellt worden sein, kann diese im Menü "Touren verwalten"
+							gelöscht werden.  Sobald in der Tourliste eine WM – Tour ausgewählt wird, erscheint ein Schalter
+							"Tour löschen". Nach dem Löschen erfolgt eine Aktualisierung der Daten, zum Loschen muss eine
+							Online – Verbindung bestehen. Erfasste Besuchsberichte  werden nicht gelöscht. Soll ein falsch
+							erfasster Bogen gelöscht werden, kann das im Menu "Besuchsbericht erfassen" erfolgen. Nach 
+							Auswahl des Besuchsberichtes und entsprechenden Kunden muss der Besuchsbericht über "Besuchsbericht
+							bearbeiten / korrigieren" aufgerufen werden. Im nächsten Fenster kann mit Klick auf den Schalter
+							"Besuchsbericht löschen" der Bericht gelöscht werden</p>
+						</div>
+						<h3>Werbemittel-Tour löschen</h3>
+							<p>Eine zusammengestellte WM - Tour muss manuell gelöscht werden. Da die Sichtbarkeit der Tour auf den Handelsbetreuer eingeschränkt ist, der die WM -Tour
+							erstellt hatte, kann auch nur dieser Handelsbetreuer die Tour löschen (Ausnahme besteht beim Admin - Login, hier werden alle WM - Touren angezeigt und können demzufolge
+							auch alle Touren gelöscht werden). Sobald in der Tourenliste auf eine WM-Tour geklickt wird, blendet sich ein Schalter "Tour löschen" ein.</p>
+						<div>
+						</div>
+					<h3>Berichtsbogen erfassen</h3>
+						<div><p>Nachdem eine Tour „offline“ gespeichert wurde, können nun für die hinterlegten Kunden Berichtsbögen erfasst werden. Sollten mehrere
+						Berichtsbögen in der Applikation hinterlegt sein, muss erst der entsprechende Berichtsbogen ausgewählt werden. Abhängig davon, welche Kunden
+						an welchen Berichtsbogen gebunden wurden, blendet die Liste die zugehörigen Kunden ein. Die Bindung der Kunden an Berichtsbögen wird im Backend
+						vorgenommen. Die Kundenliste enthält einen zusätzlichen Bearbeitungsstatus.</p>
+						<p>Rot: Bevor überhaupt eine Erfassung vorgenommen wurde, sind die Kunden rot markiert. Für den Kunden erfolgt somit eine erstmalige Erfassung.</p>
+						<p>Grün: Eine grüne Markierung bedeutet, dass der Kunde vollständig erfasst wurde, die Daten aber noch „offline“ auf dem Gerät gespeichert und somit
+						noch änderbar sind. Wird ein grün markierter Kunde ausgewählt, ändert sich der Button von "Berichtsbogen erfassen" in
+						"Berichtsbogen ansehen". Nach Klick wird der Berichtsbogen und die bereits erfassten Daten geladen und schreibgeschützt angezeigt.
+						Nach Klick auf "Berichtsbogen ändern" können nun Korrekturen vorgenommen werden. Ebenfalls können hier die erfassten Daten gelöscht werden,
+						der Kunde bekommt anschließend wieder eine rote Markierung.</p>
+						<p>Blau: die erfassten Daten wurden auf den Server übertragen, eine Änderung oder das Löschen von Daten ist nicht mehr möglich.
+						Eine Übertragung der Daten erfolgt über den Button </p>
+						<p>"erfasste Daten übertragen".</p>
+						<p>Die Berichtsbögen sind zur besseren Übersicht in einzelne Bereiche aufgeteilt, die Bereiche werden nach Klick auf die Überschrift ein- oder
+						ausgeblendet. Zur besseren Übersicht können Bereiche als bearbeitet markiert werden. Vor der Bearbeitung sind die Bereiche gelb markiert,
+						nach Klick auf "als bearbeitet markieren" wird die Markierung für den entsprechenden Bereich grün. </p>
+						<p>Über den Button "Speichern" werden die erfassten Daten lokal auf dem Gerät abgelegt. Eine Speicherung ist auch dann möglich, wenn nicht alle
+						Bereiche als bearbeitet markiert wurden. Über den Button "Zurück zur Tourenübersicht" kann die Erfassung beendet werden, die bereits erfassten bzw.
+						geänderten Daten werden nicht gespeichert. Wurde bereits eine Erfassung vorgenommen und diese Daten sind bereits gespeichert worden, so werden nur
+						die geänderten Daten nicht gespeichert.</p>
+						<p>Wichtig: Das Löschen des Browsercaches führt auch zum Löschen aller offline gespeicherten Daten! </p>
+						</div>
+						<h3>Logdatei einsehen</h3>
+						<div>
+							<p>Sämtliche EH-bezogenen Aktionen werden protokolliert und können hier eingesehen werden. Die Einträge sind nach Datum absteigend und
+							innerhalb des Datums nach EH-Nummer sortiert. Mehrere Einträge zu einem EH sind zeitlich absteigend sortiert, so dass der neueste Eintrag
+							immer an oberster Stelle steht. Mit diesem Protokoll kann nachvollzogen werden, zu welchem Zeitpunkt der Status eines EHs (rot, grün, gelb, blau) sich geändert hat und ob die Übertragungen fehlerfrei durchgeführt wurden.
+							Ein Status kann lokal gesetzt werden – immer dann, wenn im Programm  z.B. durch Speichern oder Löschen eines Bogens der Status geändert wird –
+							oder vom Server geladen werden – wenn Daten aktualisiert wurden, eine Tour geladen oder die erfassten Daten übertragen wurden.</p>
+							
+							<p>Das Protokoll beinhaltet den Status, Datum und Uhrzeit, wann der Status gesetzt wurde, die Tournummer, EH-Nummer und die Aktion bzw.
+							ob der Status vom Server geladen oder lokal gesetzt wurde.</p>
+							<p>Nach dem erstmaligen Laden einer Tour hat das Protokoll folgenden Inhalt. Der Status bei allen Ehs ist rot (liegt noch keine Erfassung vor).
+							Der Status wurde vom Server übermittelt.</p>
+							<p>
+								<div class="prgcomploggingdoku">
+									<div class="logdate"><span>Protokoll vom: 23.01.2014</span>
+										<div class="logcustom">
+									<table>
+										<tbody>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>vom Server geladen</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000002</td>
+												<td>vom Server geladen</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000003</td>
+												<td>vom Server geladen</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000004</td>
+												<td>vom Server geladen</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000005</td>
+												<td>vom Server geladen</td>
+											</tr>
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
+							</p>
+							<p>Wurde der Bogen gespeichert, ändert sich der Status auf Grün (bzw. Gelb).
+							Der Status wird vom Programm geändert – also lokal gesetzt.</p>
+
+							<p>
+								<div class="prgcomploggingdoku">
+									<div class="logdate"><span>Protokoll vom: 23.01.2014</span>
+										<div class="logcustom">
+									<table>
+										<tbody>
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:15:15</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>lokal gesetzt</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>vom Server geladen</td>
+											</tr>
+
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
+							</p>
+							<p>Eine Änderung eines bereits erfassten Bogens wird ebenfalls protokolliert,
+							dadurch entstehen mehrere Einträge.</p>
+
+							<p>
+								<div class="prgcomploggingdoku">
+									<div class="logdate"><span>Protokoll vom: 23.01.2014</span>
+										<div class="logcustom">
+									<table>
+										<tbody>
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:18:34</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>lokal gesetzt</td>
+											</tr>											
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:15:15</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>lokal gesetzt</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>vom Server geladen</td>
+											</tr>
+
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
+							</p>
+							<p>Wird ein bereits erfasster Bogen gelöscht, ändert sich der Status wieder auf Rot (nicht erfasst).
+							Alle bisherigen Protokolleinträge bleiben erhalten:</p>
+							<p>
+								<div class="prgcomploggingdoku">
+									<div class="logdate"><span>Protokoll vom: 23.01.2014</span>
+										<div class="logcustom">
+									<table>
+										<tbody>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:20:12</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>lokal gesetzt</td>
+											</tr>											
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:18:34</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>lokal gesetzt</td>
+											</tr>											
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:15:15</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>lokal gesetzt</td>
+											</tr>
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000001</td>
+												<td>vom Server geladen</td>
+											</tr>
+
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
+							</p>										
+							<p>Das folgende Beispiel protokolliert die Erfassung eines Bogens und anschließende Übertragung
+							an den Server (Schalter „erfasste Daten übertragen“). Protokolliert wird der Startzeitpunkt der Übertragung,
+							die Übertragung selbst und die anschließende Prüfung. Nach erfolgreicher Prüfung setzt das Programm den
+							Status Blau (Daten übertragen). Ist die Übertragung abgeschlossen, werden anschließend automatisch die Tour
+							und der aktuelle Zustand vom Server übermittelt. Dadurch entsteht der oberste Eintrag Status Blau,
+							vom Server geladen.</p>
+							<p>
+								<div class="prgcomploggingdoku">
+									<div class="logdate"><span>Protokoll vom: 23.01.2014</span>
+										<div class="logcustom">
+									<table>
+										<tbody>
+											<tr>
+												<td><img src="img/blue.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>vom Server geladen</td>
+											</tr>											
+											<tr>
+												<td><img src="img/blue.png"></td>
+												<td>23.01.2014 14:13:59</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>lokal gesetzt</td>
+											</tr>											
+											<tr>
+												<td><img src="img/transfer_ok.png"></td>
+												<td>23.01.2014 14:13:59</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>Übertragung fehlerfrei beendet</td>
+											</tr>
+											<tr>
+												<td><img src="img/transfer_ok.png"></td>
+												<td>23.01.2014 14:13:59</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>Übertragung ok, prüfe...</td>
+											</tr>
+											<tr>
+												<td><img src="img/transfer.png"></td>
+												<td>23.01.2014 14:13:58</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>Starte Übertragung</td>
+											</tr>
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:13:45</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>lokal gesetzt</td>
+											</tr>											
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:12:05</td>
+												<td>50367</td>
+												<td>00000006</td>
+												<td>vom Server geladen</td>
+											</tr>
+
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
+							</p>
+							<p>Eine fehlerhafte Übertragung wird ebenfalls protokolliert:</p>
+							<p>
+								<div class="prgcomploggingdoku">
+									<div class="logdate"><span>Protokoll vom: 23.01.2014</span>
+										<div class="logcustom">
+									<table>
+										<tbody>
+											<tr>
+												<td><img src="img/transfer_error.png"></td>
+												<td>23.01.2014 14:39:37</td>
+												<td>50367</td>
+												<td></td>
+												<td>Fehler bei Übertragung!</td>
+											</tr>
+											<tr>
+												<td><img src="img/transfer.png"></td>
+												<td>23.01.2014 14:39:36</td>
+												<td>50367</td>
+												<td>00000008</td>
+												<td>Starte Übertragung</td>
+											</tr>
+											<tr>
+												<td><img src="img/green.png"></td>
+												<td>23.01.2014 14:36:28</td>
+												<td>50367</td>
+												<td>00000008</td>
+												<td>lokal gesetzt</td>
+											</tr>											
+											<tr>
+												<td><img src="img/red.png"></td>
+												<td>23.01.2014 14:14:05</td>
+												<td>50367</td>
+												<td>00000008</td>
+												<td>vom Server geladen</td>
+											</tr>
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
+							</p>							
+						</div>
+						<br class="clear">
+				</div>
+			
+				<div class="container-box">
+					<h3>Programm - Updates</h3>
+					<span id="updates"></span>
+				</div>
+			</div>
+		</div><!-- #inputForm -->
+		
+<!--		<div class="overlay_wait">
+		    <div class="inner">
+           		<img src="img/wait.gif">
+                <div><span id="progress"></span></div>
+				<div id="progressbar_outer"><div id="progressbar"></div></div>
+			</div>
+		</div>-->
+		
+		<div class="overlay_msg">
+		    <div class="inner">
+				<p>Die Anwendung wurde bereits in einem anderen Browserfenster gestartet</p>
+				<p>Bitte schließen Sie dieses Fenster.</p>
+				<p>Sollte die Anwendung nicht in einem weiteren Fesnter laufen, schließen Sie bitte den Browser und starten Sie die Anwendung erneut</p>
+			</div>
+		</div>
+		<div class="overlay_pwreset">
+		    <div class="inner">
+				<div class="container-box">
+				<p>Das Passwort für Benutzer <span id="txtpwresetusername"></span> wird zurückgesetzt.</p>
+				<p>Dazu wird eine Bestätigungsmail an folgende Adresse versandt:</p>
+				<p><span id="txtpwresetmail"></span></p>
+				<p>Bitte aktivieren Sie den in der Mail enthaltenen Link und ändern Sie Ihr Passwort in den nächsten 20 Minuten.</p>
+				<input type="hidden" id="pwresetusername">
+				<input type="hidden" id="pwresetmail">
+				<input type="hidden" id="pwresetuserid">
+				<input type="button" id="btnPwResetSend" class="vvbutton alignleft" value="Passwort zurücksetzen">
+				<input type="button" id="btnPwResetCancel" class="vvbutton alignright" value="Abbrechen">
+				<br class="clear">
+				</div>
+			</div>
+		</div>
+			<div id="wrapper">
+	</div> <!-- wrapper -->
+
+	
+<script>
+	
+
+writeLog("0", "0", "Programm gestartet");
+
+
+function online() {
+  onoffLine(true);
+
+}
+
+function offline() {
+  onoffLine(false);
+}
+//
+//
+//	// Konvertierung Restore Update April
+//	
+//
+//	//Konvertierung Update September datas und status
+//	//
+//	//var convDatas = $.jStorage.get("datas", "");
+//	//
+//	//if (convDatas != "") {
+//	//	setLocalStorage("datas", convDatas);
+//	//	writeLog("0", "0", "Konvertiere localStore datas");
+//	//	$.jStorage.deleteKey ("datas");
+//	//	
+//	//}
+//	//
+//	//var convStatus = $.jStorage.get("status", "");
+//	//
+//	//if (convStatus != "") {
+//	//	setLocalStorage("status", convStatus);
+//	//	writeLog("0", "0", "Konvertiere localStore status");
+//	//	$.jStorage.deleteKey ("status");
+//	//	
+//	//}
+//	
+//	//Konvertierung Ende
+//	
+//	
+//	
+	
+	window.addEventListener('online', online, false);
+	window.addEventListener('offline', offline, false);
+
+
+
+//	function handleCacheEvent(e) {
+//		console.log(e.type);
+//		 
+//		if (e.type == "checking") {
+//			writeLog("0", "0", "Prüfe auf neues Update");
+//		}
+//		 
+//		if (e.type == "downloading") {
+//			$('.overlay_wait').show();
+//			setProgress(0);
+//			$("#progress").text("Update wird durchgeführt...");
+//		}
+//		 
+//		if (e.type == "progress") {
+//			if (!$('.overlay_wait').is(':visible')) {
+//				$('.overlay_wait').show();
+//			}
+//			setProgress(0);
+//		
+//			$("#progress").text("Update wird durchgeführt...");
+//			var logText = "Update Progress ";
+//			logText = logText + e.loaded;
+//			
+//			if (e.total != undefined) {
+//				logText = logText + " von " + e.total;
+//				console.log(logText);
+//				var percentComplete = (e.loaded / e.total) * 100;
+//				percentComplete = percentComplete.toFixed(2);
+//				setProgress (percentComplete); 
+//			}
+//			writeLog("0", "0",logText);
+//		}
+//		
+//		if (e.type == "cached") {
+//			$('.overlay_wait').hide();
+//		}
+//			
+//		if (e.type == "error") {
+//			$('.overlay_wait').hide();
+//			writeLog("0", "0", "Update Fehler: ");
+//		}
+//			
+//		if (e.type == "updateready") {
+//				
+//			$('.overlay_wait').hide();
+//			
+//			writeLog("0", "0", "Update Ready (handleCache), appCache Status: " + appCache.status);
+//			writeLog("0", "0", "Update Ready (handleCache), window Status: " + window.applicationCache.UPDATEREADY);
+//			
+//			if (appCache.status == appCache.UPDATEREADY) {
+//				console.log("func updateready");
+//				//reset Version
+//				
+//				$.jStorage.set("version", "-1");
+//				var currentDate = new Date();
+//					setCurrentVal('prgupdate', dateTimeToStr(new Date()));
+//				//window.applicationCache.swapCache();
+//				appCache.swapCache();
+//				console.log("swapCache");
+//				writeLog("0", "0", "Update durchgeführt (handleCache)");
+//				writeLog("0", "0", "Seite wird neu geladen (handleCache)");
+//				window.location.reload();
+//			}
+//		
+//			else {
+//				writeLog("0", "0", "Update Event neu gebunden");
+//				appCache.addEventListener('updateready', handleCacheEvent, false);
+//				
+//				if (appCache.status === appCache.UPDATEREADY) {
+//					$.jStorage.set("version", "-1");
+//					var currentDate = new Date();
+//					//$.jStorage.set("last_app_update", currentDate.toLocaleString());
+
+//					setCurrentVal('prgupdate', dateTimeToStr(new Date()));
+//					//window.applicationCache.swapCache();
+//					appCache.swapCache();
+//					writeLog("0", "0", "Update durchgeführt (handleCache Event 2)");
+//					writeLog("0", "0", "Seite wird neu geladen (handleCache Event 2)");
+//					window.location.reload();						
+//				}
+//			}
+//		}
+//		 
+//		if (e.type == "cached") {
+//			writeLog("0", "0", "Neues Update im Cache gespeichert");
+//		}
+//		
+//		if (e.type == "noupdate") {
+//			writeLog("0", "0", "Kein neues Update verfügbar");
+//		}
+//		
+//	}
+//
+//	
+//	// start update prozess
+//	var appCache = window.applicationCache;
+//	//function handleCacheError(e) {
+//	//  console.log('Error: Cache failed to update!');
+//	//  writeLog("0", "0", "Update Fehler: ");
+//	//};
+//	
+//	// bind Events
+//	
+//	// Fired after the first cache of the manifest.
+//	appCache.addEventListener('cached', handleCacheEvent, false);
+//	
+//	// Checking for an update. Always the first event fired in the sequence.
+//	appCache.addEventListener('checking', handleCacheEvent, false);
+//	
+//	// An update was found. The browser is fetching resources.
+//	appCache.addEventListener('downloading', handleCacheEvent, false);
+//	
+//	// The manifest returns 404 or 410, the download failed,
+//	// or the manifest changed while the download was in progress.
+//	appCache.addEventListener('error', handleCacheEvent, false);
+//	
+//	// Fired after the first download of the manifest.
+//	appCache.addEventListener('noupdate', handleCacheEvent, false);
+//	
+//	// Fired if the manifest file returns a 404 or 410.
+//	// This results in the application cache being deleted.
+//	appCache.addEventListener('obsolete', handleCacheEvent, false);
+//	
+//	// Fired for each resource listed in the manifest as it is being fetched.
+//	appCache.addEventListener('progress', handleCacheEvent, false);
+//	
+//	// Fired when the manifest resources have been newly redownloaded.
+//	appCache.addEventListener('updateready', handleCacheEvent, false);
+//	
+//	appCache.update(); // Attempt to update the user's cache.
+//	
+//	
+	var oldDate =  $.jStorage.get("last_cache_update", "");
+	console.log(oldDate);
+	if (oldDate !== '') {
+		 setCurrentVal('cacheupdate', dateTimeToStr(new Date(oldDate)));     
+	}
+
+	var cacheUpdate =  getCurrentVal('cacheupdate');
+
+	if(cacheUpdate === "") {
+		// Cache wurde geleert / App neu gestartet
+		setCurrentVal('cacheupdate', dateTimeToStr(new Date()));
+		//$.jStorage.set("last_cache_update", currentDate.toLocaleString());
+		writeLog("0", "0", "Logprotokoll wird nach erstmaligen Starten / Cache löschen neu angelegt");
+	}
+		
+</script>
+</body>
+</html>

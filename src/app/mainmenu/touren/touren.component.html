@@ -1,0 +1,12 @@
+<div class="tab-pane fade in">
+				<div class="container-box" data-height="100">
+					<ul class="nav nav-tabs">
+						<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="./" data-toggle="pill">Tour laden</a></li>
+						<li routerLinkActive="active"><a routerLink="./erstellen" data-toggle="pill">Tour zusammenstellen</a></li>
+					</ul>
+				
+					<div class="tab-content">
+             <router-outlet></router-outlet>
+          </div>
+        </div>
+</div>

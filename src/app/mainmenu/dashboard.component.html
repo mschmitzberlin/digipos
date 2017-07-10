@@ -1,0 +1,243 @@
+<div class="tab-pane fade in active">
+  <div class="row">
+    <div class="col-xs-1 col-md-2"></div>
+    <div class="col-xs-10 col-sm-5 col-md-4">div left</div>
+    <div class="col-xs-10 col-sm-5 col-md-4">div rigth <br>div right</div>
+  </div>
+	<div class="row">
+		<div class="col-xs-1 col-md-2"></div>
+   
+		<div class="col-xs-10 col-sm-5 col-md-4">
+      <div class="dashbord-box">
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Daten aktualisieren</h3>
+				</div>
+			</div>
+			<div class="dashbord-content">
+				<div class="row">
+					<div class="col-xs-12">
+						Letzte Aktualisierung am:<span id="lastUpdate"></span>
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-xs-12">
+						<span id="admLoad" class="admingroup">
+										Touren aller HB für den <input type="text" name="admLoadDate" maxlength="10" size="10" class="formatdate"> laden
+									</span>
+					</div>
+				</div>
+
+			</div>
+			<div class="dashbord-footer">
+				<div class="row">
+					<div class="col-xs-1 col-sm-2"></div>
+					<div class="col-xs-10 col-sm-8">
+						<button id="btnUpdate" type="button" class="btn btn-danger btn-block">Daten aktualisieren</button>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+		<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+       <div class="dashboard-wrapper">
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Erfasste Daten</h3>
+				</div>
+			</div>
+			<div class="dashbord-content">
+				<div class="row">
+					<div class="col-xs-12">
+						<h4>Lokal gespeicherte Formulare: <span id= "countStored"></span></h4>
+						<p><span id="offlStoreMsg"></span></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12"><span id="transfertext"></span></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12"><span id="transferstatus">&nbsp;</span></div>
+				</div>
+
+			</div>
+			<div class="dashbord-footer">
+				<div class="row">
+					<div class="col-xs-1 col-sm-2"></div>
+					<div class="col-xs-10 col-sm-8">
+						<button id="btnStoreData" class="btn btn-danger btn-block">Erfasste Daten übertragen</button>
+					</div>
+				</div>
+			</div>
+    </div>
+		</div>
+
+	</div>
+	<!--1. dashborad -->
+	<div class="row dashbord">
+		<div class="col-xs-1 col-md-2"></div>
+		<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<h3>Touren verwalten</h3>
+				</div>
+			</div>
+			<div class="dashbord-content">
+				<div class="row">
+					<div class="col-xs-12">
+						gespeicherte Tour:
+						<p><b> <span id="currentTourName"></span></b></p>
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-xs-6">
+						<button type="button" class="btn btn-default btn-block" onclick="showWindow('plistewindow');">Packliste</button>
+					</div>
+				</div>
+				<p></p>
+			</div>
+			<div class="dashbord-footer">
+				<div class="row">
+					<div class="col-xs-1 col-sm-2"></div>
+					<div class="col-xs-10 col-sm-8">
+						<button type="button" class="btn btn-danger btn-block" onclick="$('#navtour a').click();">Touren verwalten</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Besuchsberichte</h3>
+				</div>
+			</div>
+			<div class="dashbord-content">
+				<div class="row">
+					<div class="col-xs-2"><img src="img/red.png"></div>
+					<div class="col-xs-8">Nicht erfasste Berichte:</div>
+					<div class="col-xs-2"><span id="countRed"></span></div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-md-2 col-xs-2"><img src="img/yellow.png"></div>
+					<div class="col-md-8 col-xs-8">Nicht vollständig erfasst:</div>
+					<div class="col-md-2 col-xs-2"><span id="countYellow"></span></div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-md-2 col-xs-2"><img src="img/green.png"></div>
+					<div class="col-md-8 col-xs-8">Vollständig erfasst:</div>
+					<div class="col-md-2 col-xs-2"><span id="countGreen"></span></div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-md-2 col-xs-2"><img src="img/blue.png"></div>
+					<div class="col-md-8 col-xs-8">Exportierte Besuchsberichte:</div>
+					<div class="col-md-2 col-xs-2"><span id="countBlue"></span></div>
+				</div>
+			</div>
+			<div class="dashbord-footer">
+				<div class="row">
+					<div class="col-xs-1 col-sm-2"></div>
+					<div class="col-xs-10 col-sm-8">
+						<button type="button" class="btn btn-danger btn-block" onclick="$('#navErfassen a').click();">Besuchsberichte erfassen</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--2. dashborad -->
+	<div class="row dashbord">
+		<div class="col-xs-1 col-md-2"></div>
+		<div class="col-xs-10 col-sm-5 col-md-4 dashbord-box">
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Sonstiges</h3>
+				</div>
+			</div>
+			<div class="dashbord-content">
+				<div class="row">
+					<div class="col-xs-2"></div>
+					<div class="col-xs-8">
+						<button type="button" class="btn btn-danger btn-block" onclick="$('#navSonstiges a').click();">Dokumente</button>
+					</div>
+					<div class="col-xs-2"></div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-xs-2"></div>
+					<div class="col-xs-8">
+						<button type="button" class="btn btn-danger btn-block" onclick="$('#navSonstiges a').click();">Programmbeschreibung</button>
+					</div>
+					<div class="col-xs-2"></div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-xs-2"></div>
+					<div class="col-xs-8">
+						<button type="button" class="btn btn-danger btn-block" id="btnStatus" onclick="$('#navSonstiges a').click();">Logdatei</button>
+					</div>
+					<div class="col-xs-2"></div>
+				</div>
+			</div>
+			<div class="dashbord-footer"></div>
+		</div>
+		<div class="col-md-4 col-xs-5 dashbord-box">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<h3>Systeminfos</h3>
+				</div>
+			</div>
+			<div class="dashbord-content">
+				<div class="row">
+					<span id="offlStoreMsgs"></span>
+					<div class=" col-xs-12">Versionsnummern (müssen übereinstimmen!)</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-1 col-md-2 "></div>
+					<div class="col-xs-2">Lokal:</div>
+					<div class="col-xs-8"><span id="intVersion"></span></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-1 col-md-2"></div>
+					<div class="col-xs-2">Server:</div>
+					<div class="col-xs-8"><span id="serverVersion"></span></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">Letztes Programmupdate:</div>
+					<div class="col-xs-12 col-md-6"><span id="prgUpdate"></span></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-6">Cache zurückgesetzt:</div>
+					<div class="col-xs-12 col-sm-6"><span id="cacheUpdate"></span></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">Verfügbarer Speicher:</div>
+					<div class="col-xs-12 col-sm-6"><span id="maxlocalsize"></span></div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="progress">
+							<div id="memoryprogress" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+								50% Complete (info)
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="dashbord-footer">
+				<div class="row">
+					<div class="col-md-2 col-sm-2"></div>
+					<div class="col-md-8 col-sm-8">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--3. dashborad -->
+</div>
+<!--tab-content mainmenustart-->

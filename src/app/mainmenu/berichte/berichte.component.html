@@ -1,0 +1,12 @@
+<div class="tab-pane fade in">
+				<div class="container-box" data-height="100">
+					<ul class="nav nav-tabs">
+						<li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="./" data-toggle="pill">Bericht erfassen</a></li>
+						<li routerLinkActive="active"><a routerLink="./drucken" data-toggle="pill">Bericht drucken</a></li>
+					</ul>
+				
+					<div class="tab-content">
+             <router-outlet></router-outlet>
+          </div>
+        </div>
+</div>

@@ -1,0 +1,61 @@
+						<div class="tab-pane">
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<h4>Tour zusammenstellen</h4>
+								</div>
+							</div>							
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-4">
+									<label for="txtSearchManu" class="control-label ">Bitte EPA-Nummer, Name oder Strasse eingeben:</label>
+								</div>
+								<div class="col-xs-4">
+									<input type="text" class="form-control" id="txtSearchManu">
+								</div>
+								<div class="col-xs-3 col-md-2">
+									<button id="btnSearchManu" type="button" class="btn btn-danger btn-block">Suchen</button>
+								</div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<p>Gefundene Einträge:<span id="tourmanucount"></span> Mit Klick auf <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> den Eintrag zur Tourenliste hinzufügen</p>
+								</div>
+							</div>
+							<p></p>
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+									<div class="well-sm">
+										<div id="customlistmanuscroll"  class="scroller" data-height="50">
+											<div id="customlistmanu" class="list-group"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<p></p>
+									<p>zusammengestellte Tourenliste, mit Klick auf <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> den Eintrag aus der Tourenliste entfernen</p>
+								</div>
+							</div>								
+							<div class="row">
+								<div class="col-xs-1"></div>
+								<div class="col-xs-10">
+								<div class="well-sm">
+									<div id="tourlistmanuscroll"  class="scroller" data-height="50">
+										<div id="tourlistmanu" class="list-group"></div>
+									</div>
+									</div>	
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-8 col-md-9"></div>
+								<div class="col-xs-4 col-md-2">
+									<button id="btnStoreTourManu" type="button" class="btn btn-danger btn-block">Tour zusammenstellen</button>
+								</div>
+							</div>
+						</div>

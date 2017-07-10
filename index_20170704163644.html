@@ -1,0 +1,674 @@
+﻿<!DOCTYPE html>
+<html manifest="cache.manifest">
+ <!-- Callcenter -->
+<head>
+    <meta charset="UTF-8">
+	<meta robots="noindex,nofollow,noarchive">
+	<title>Besuchsreport</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ 	
+	<meta http-equiv="cache-control" content="max-age=0">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="cache-control" content="no-store">
+	<meta http-equiv="cache-control" content="must-revalidate">
+	<meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <meta http-equiv="expires" content="0">
+	<meta http-equiv="expires" content="Tue, 01 Jan 2013 12:00:00 GMT"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+   	<link rel="apple-touch-icon" href="img/Icon.jpg">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/application.css" rel="stylesheet">
+
+	<script src="js/jquery-1.12.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/iscroll4.js" type="application/javascript" ></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>	
+	<script src="js/md5-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/globals.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/functions.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/validate.js" type="text/javascript" charset="utf-8"></script>	
+    <script src="js/application.js" type="text/javascript" charset="utf-8"></script>
+
+	<style>
+
+
+
+.scrollable {
+	position: relative;
+	width: 100%;
+	height: 30%;
+	overflow: hidden;
+	margin-bottom: 10px;
+
+	/* Prevent native touch events on Windows */
+	-ms-touch-action: none;
+
+	/* Prevent the callout on tap-hold and text selection */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	/* Prevent text resize on orientation change, useful for web-apps */
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}		
+	
+	</style>
+		<script type="text/javascript">
+			
+//			var customListScroll;
+//			function loaded() {
+//				
+//				
+//				  customListScroll = new iScroll('#customlist');
+//			}
+//			
+//document.addEventListener('DOMContentLoaded', loaded, false);			
+
+var myScroll, myScrollxx, customListScroll, formContainerScroll;
+//
+//function loaded () {
+//	//myScroll = new IScroll('.scrollable', {
+//	//	mouseWheel: true,
+//	//	scrollbars: true});
+//		
+////  myScrollxx = new IScroll('#wrapper2', {
+////		mouseWheel: true,
+////		scrollbars: true});	
+//	customListScroll = new IScroll('#customlistScroll', {
+//		mouseWheel: true,
+//		scrollbars: true,
+//		click: true
+//	});
+//	
+//		formContainerScroll = new IScroll('#formContainerScroll', {
+//		mouseWheel: true,
+//		scrollbars: true
+//		
+//	 
+//	});
+
+   function loaded() {
+        
+        customListScroll = new iScroll('customlistScroll');
+        formContainerScroll = new iScroll('formContainerScroll');
+
+    
+        formContainerScroll.options.onBeforeScrollStart = function(e) {                
+            var target = e.target;
+            while (target.nodeType != 1) target = target.parentNode;
+            if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA'){
+                e.preventDefault();
+            }
+       }	
+	
+}	
+	
+//		formContainerScroll.on('beforeScrollStart', function (e) {
+//			formContainerScroll.disable();
+//			//console.log(this.target);
+//			//var target = e.target;
+//			//while (target.nodeType != 1) target = target.parentNode;
+//			//
+//			//if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+//			//e.preventDefault();
+//			}, false);
+//}	
+
+
+
+//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+
+
+</script>
+
+<style type="text/css">
+
+</style>
+			
+	
+</head>
+<body onload="loaded();">
+
+
+
+
+
+<div class="container-fluid">
+	
+
+	
+	
+	
+	<div class="window active" id="login">	
+	   <div class="page-header">
+			<div class="row row-eq-height">
+				<div class="col-md-1 hidden-xs"></div>
+				<div class="col-md-5 col-xs-12"><h3>Nachfahrt Erfassung</h3></div>
+				<div class="col-md-5 col-xs-12 col-center"><img src="img/logo.jpg" class="img-responsive center-block"></div>   
+				<div class="col-md-1 hidden-xs""></div>
+			</div>			
+		
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="col-md-3"></div>	
+			<div class="col-md-6 container-box">
+				<div class="row">
+					<p></p>
+					<div class="col-md-2 col-sm-1"></div>	
+					<label for="username" class="col-md-2 col-sm-2 col-xs-5 control-label">Benutzer:</label>
+					<div class="col-md-6 col-sm-6 col-xs-7">
+						<input type="text" class="form-control"  id="username" value="">
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-md-2 col-sm-1"></div>	
+					<label for="password" class="col-md-2 col-sm-2 col-xs-5 control-label">Passwort:</label>
+					<div class="col-md-6 col-sm-6 col-xs-7">
+						<input type="password" class="form-control"  id="password" value="">
+					</div>				
+				</div>
+				
+				<p></p>
+				<div class="row ">
+					<div class="col-md-2"></div>
+					<div class="col-md-10 text-center">
+						<strong>Bitte auf Gross / Kleinschreibung achten</strong>
+					</div>
+				</div>
+				<p></p>
+				<div class="row ">
+					<div class="col-md-5 col-sm-4"></div>
+					<div class="col-md-4  col-sm-4 text-center"> <button id="btnLogin" class="btn btn-danger btn-block">Anmelden</button></div>
+				</div>
+				<p></p>
+			</div>
+		</div>
+		
+
+
+		
+		
+		
+	</div> <!--window login-->
+
+
+
+	<div class="window" id="mainMenu">
+        <nav class="navbar navbar-default">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Navigation ein-/ausblenden</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+				 
+                    <ul class="nav navbar-nav">
+						<li class="active"><a data-toggle="tab" href="#mainMenuStart">Start</a></li>
+                        <li id="liErfassen"><a data-toggle="tab" href="#mainMenuCollect">Erfassen</a></li>
+                    </ul>
+					<button id="btnLogout" type="button" class="navbar-right btn btn-default navbar-btn">Abmelden</button>
+					<span class="navbar-text navbar-right username">Angemeldet: </span>
+                </div>
+        </nav>
+		
+		<div class="tab-content">
+			<div id="mainMenuStart" class="tab-pane fade in active">
+					<div class="row dashbord">
+						<div class="col-md-2 col-xs-1"></div>
+						<div class="col-md-4 col-xs-5 container-box">
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<h3>Daten aktualisieren</h3>
+									</div>
+								</div>
+								<div class="dashbord-content">
+									<div class="row">
+										<div class="col-md-12 col-xs-12">
+											Letzte Aktualisierung am:<span id="lastUpdate"></span>
+										</div>
+									</div>
+
+								</div>
+								<div class="dashbord-footer">
+									<div class="row">
+										<div class="col-md-2 col-sm-2"></div>
+										<div class="col-md-8 col-sm-8">
+											<button id="btnUpdate" type="button" class="btn btn-danger btn-block">Daten jetzt aktualisieren</button>
+										</div>
+									</div>
+								</div>
+								
+						</div>
+						<div class="col-md-4 col-xs-5 container-box">
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<h3>Erfasste Daten</h3>
+								</div>
+							</div>
+							<div class="dashbord-content">										
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<h4>Lokal gespeicherte Formulare: <span id= "countStored"></span></h4>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 col-sm-12"><span id="transfertext"></span></div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-sm-4"><span id="transferstatus">&nbsp;</span></div>
+								</div>								
+								
+							</div>
+							<div class="dashbord-footer">		
+								<div class="row">
+									<div class="col-md-2 col-sm-2"></div>
+									<div class="col-md-8 col-sm-8">
+										<button id="btnStoreData" class="btn btn-danger btn-block">Erfasste Daten übertragen</button>
+									</div>
+								</div>
+							</div>
+
+						</div>	
+
+					</div>
+					<div class="row dashbord">
+						<div class="col-md-2 col-xs-1"></div>
+						<div class="col-md-4 col-xs-5 container-box">
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<h3>Besuchsberichte</h3>
+								</div>
+							</div>
+							<div class="dashbord-content">
+								<div class="row">
+									<div class="col-md-2 col-xs-2"><img src="img/red.png"></div>
+									<div class="col-md-8 col-xs-8">Nicht erfasste Berichte:</div>
+									<div class="col-md-2 col-xs-2"><span id="countRed"></span></div>
+								</div>
+								<p></p>
+								<div class="row">
+									<div class="col-md-2 col-xs-2"><img src="img/yellow.png"></div>
+									<div class="col-md-8 col-xs-8">Nicht vollständig erfasst:</div>
+									<div class="col-md-2 col-xs-2"><span id="countYellow"></span></div>										
+								</div>
+								<p></p>
+								<div class="row">
+									<div class="col-md-2 col-xs-2"><img src="img/green.png"></div>
+									<div class="col-md-8 col-xs-8">Vollständig erfasst:</div>
+									<div class="col-md-2 col-xs-2"><span id="countGreen"></span></div>										
+								</div>
+								<p></p>
+								<div class="row">
+									<div class="col-md-2 col-xs-2"><img src="img/blue.png"></div>
+									<div class="col-md-8 col-xs-8">Exportierte Besuchsberichte:</div>
+									<div class="col-md-2 col-xs-2"><span id="countBlue"></span></div>											
+								</div>									
+
+							</div>
+							<div class="dashbord-footer">
+								<div class="row">
+									<div class="col-md-2 col-sm-2"></div>
+									<div class="col-md-8 col-sm-8">
+										<button type="button" class="btn btn-danger btn-block" onclick="$('#liErfassen a').click();">Besuchsberichte erfassen</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					<div class="col-md-4 col-xs-5 container-box">
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<h3>Systeminfos</h3>
+								</div>
+							</div>
+							<div class="dashbord-content">
+								<div class="row">
+									<div class="col-md-12 col-xs-6">Versionsnummern (müssen übereinstimmen!)</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2 col-xs-1"></div>
+									<div class="col-md-4 col-xs-5">Lokal:</div>
+									<div class="col-md-6 col-xs-6"><span id="intVersion"></span></div>											
+								</div>
+								<div class="row">
+									<div class="col-md-2 col-xs-1"></div>
+									<div class="col-md-4 col-xs-5">Server:</div>
+									<div class="col-md-6 col-xs-6"><span id="serverVersion"></span></div>											
+								</div>	
+								
+								<div class="row">
+									<div class="col-md-6 col-xs-6">Letztes Programmupdate:</div>
+									<div class="col-md-6 col-sm-6"><span id="cacheUpdate"></span></div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-xs-6">Maximaler Speicher (ca) :</div>
+									<div class="col-md-6 col-sm-6"><span id="maxlocalsize"></span></div>
+								</div>							
+								<div class="row">
+									<div class="col-md-6 col-xs-6">Davon belegt (ca):</div>
+									<div class="col-md-6 col-sm-6"><span id="currentlocalsize"></span></div>
+								</div>							
+							
+							</div>
+							<div class="dashbord-footer">		
+								<div class="row">
+									<div class="col-md-2 col-sm-2"></div>
+									<div class="col-md-8 col-sm-8">
+										
+									</div>
+								</div>
+							</div>
+
+						</div>							
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-5 col-sm-8">
+
+						</div>
+						<div class="col-md-3 col-sm-4">
+							
+						</div>
+					</div>
+					<p></p>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-5 col-sm-8">
+							<span id="offlStoreMsg"></span>
+						</div>
+
+					</div>					
+
+			</div>
+
+			<div id="mainMenuCollect" class="tab-pane fade">
+				<div class="container-box" data-height="30">
+					<div id="formmenu">
+						<h3>Besuchsbericht auswählen</h3>
+						<div id="formlist"  data-idname="formid" data-function="customList()" class="list-group"></div>
+					</div>
+				</div>
+				<div id="custom-box" class="container-box" data-height="70">
+					<h3>Besuchsbericht auswählen</h3>
+					
+						<div id="customlistScroll" class="scrollable">
+							<div id="customlist" data-idname="customid" class="list-group"></div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 col-xs-3"></div>
+							<div class="col-md-4 col-xs-6">
+								<button id="btnCreate" type="button" class="btn btn-danger btn-block">Besuchsbericht erfassen</button>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- window -->
+	
+	<div class="window" id="inputForm">
+        <nav class="navbar navbar-default">
+			<div id="navbar2" class="collapse navbar-collapse">
+			 
+				<ul class="nav navbar-nav">
+				</ul>
+				<span class="navbar-text navbar-right username">Angemeldet: </span>
+			</div>
+        </nav>		
+
+<!--		<div class="tab-content">
+			<div id="inputMenuStore" class="tab-pane fade in active">-->
+				<div class="container-box"  data-height="100">
+					<div id="formContainerScroll" class="scrollable">
+						<div id="formContainer"></div>
+					</div>
+						<div class="row formenable">
+							<div class="col-md-2" ></div>
+							<div class="col-md-3 col-sm-3 col-sx-3">
+								<button id="btnSend" type="button" class="btn btn-success btn-block">Speichern</button>
+							</div>
+							<div class="col-md-3 col-sm-3 col-sx-3">
+								<button id="btnCancel" type="button" class="btn btn-danger btn-block" onclick="openModalDlg('#dlgBtnCancel')">Abbrechen</button>
+							</div>							
+							
+							<div class="col-md-3 col-sm-3">
+								
+							</div>							
+						</div>
+						<div class="row formdisable">
+							<div class="col-md-2" ></div>
+							<div class="col-md-2 col-sm-4 col-sx-4">
+								<button id="btnBackMain" class="btn btn-success btn-block"><< Zurück</button>			
+							</div>
+							<div class="col-md-3 col-sm-4 col-sx-4">
+								<button id="btnEdit" class="btn btn-danger btn-block">Besuchsbericht bearbeiten</button>								
+							</div>
+							<div class="col-md-3 col-sm-4 col-sx-4">
+								<button id="btnDel" type="button" class="btn btn-danger btn-block" onclick="openModalDlg('#dlgBtnDel');">Besuchsbericht löschen</button>
+							</div>							
+						</div>						
+				</div>
+<!--			</div>		
+		</div>-->
+		
+		
+	</div>
+	
+	<div id ="alertModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-text"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Schliessen</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!--	Dialog erfassen -> Abbrechen-->
+	<div id ="dlgBtnCancel" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Erfassung abbrechen</h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-text">
+						Möchten Sie die Erfassung abbrechen? Erfasste Daten werden nicht gespeichert!
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" id="btnCancelYes" data-dismiss="modal">Erfassung abbrechen</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Zurück zur Erfassung</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!--	Dialog Besuchsbericht löschen -->
+	<div id ="dlgBtnDel" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Besuchsbericht löschen</h4>
+					</div>
+					<div class="modal-body">
+						<p class="modal-text">
+							Möchten Sie den Besuchsbericht wirklich löschen?
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" id="btnDelYes" data-dismiss="modal">Besuchsbericht löschen</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+					</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+	
+		<div id ="waitModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+
+					<div class="modal-body">
+						<img src="img/wait.gif"  class="img-responsive center-block">
+						<p></p>
+<!--						<div class="progress">
+							<div id="progressbar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+								<span class="sr-only">40% Complete (success)</span>
+							</div>
+						</div>	-->					
+						<div id="progressinfo"></div>
+						<div id="progressbar_outer"><div id="progressbar"></div></div>
+					</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+</div> <!--container-->
+
+<script>
+	
+
+
+
+
+function online() {
+  onoffLine(true);
+
+}
+
+function offline() {
+  onoffLine(false);
+}
+
+
+	
+	
+	
+	
+	window.addEventListener('online', online, false);
+	window.addEventListener('offline', offline, false);
+
+
+
+	function handleCacheEvent(e) {
+		console.log(e.type);
+		 
+		 
+		if (e.type == "downloading") {
+			$('#waitModal').show();
+			setProgress(0);
+			$("#progressinfo").text("Update wird durchgeführt...");
+		}
+		 
+		if (e.type == "progress") {
+			if (!$('#waitModal').is(':visible')) {
+				$('#waitModal').show();
+			}
+			setProgress(0);
+		
+			$("#progressinfo").text("Update wird durchgeführt...");
+			var logText = "Update Progress ";
+			logText = logText + e.loaded;
+			
+			if (e.total != undefined) {
+				logText = logText + " von " + e.total;
+				console.log(logText);
+				var percentComplete = (e.loaded / e.total) * 100;
+				percentComplete = percentComplete.toFixed(2);
+				setProgress (percentComplete); 
+			}
+			writeLog("0", "0",logText);
+		}
+		
+		if (e.type == "cached") {
+			$('#waitModal').hide();
+		}
+			
+		if (e.type == "error") {
+			$('#waitModal').hide();
+		}
+			
+		if (e.type == "updateready") {
+				
+			$('#waitModal').hide();
+			
+			if (appCache.status == appCache.UPDATEREADY) {
+				
+				setVars("version", "-1");
+				var currentDate = new Date();
+				setVars("lastupdate", currentDate.toLocaleString());
+
+				appCache.swapCache();
+				window.location.reload();
+			}
+		
+			else {
+
+				appCache.addEventListener('updateready', handleCacheEvent, false);
+				
+				if (appCache.status === appCache.UPDATEREADY) {
+					setVars("version", "-1");
+					var currentDate = new Date();
+					setVars("lastupdate", currentDate.toLocaleString());
+
+					appCache.swapCache();
+					window.location.reload();						
+				}
+			}
+		}
+		
+	}
+
+	
+	// start update prozess
+	var appCache = window.applicationCache;
+	appCache.addEventListener('cached', handleCacheEvent, false);
+	appCache.addEventListener('checking', handleCacheEvent, false);
+	appCache.addEventListener('downloading', handleCacheEvent, false);
+	appCache.addEventListener('error', handleCacheEvent, false);
+	appCache.addEventListener('noupdate', handleCacheEvent, false);
+	appCache.addEventListener('obsolete', handleCacheEvent, false);
+	appCache.addEventListener('progress', handleCacheEvent, false);
+	appCache.addEventListener('updateready', handleCacheEvent, false);
+	
+	appCache.update(); // Attempt to update the user's cache.
+	
+	
+	var cacheUpdate =  getVars("cacheupdate", "");
+
+	if(cacheUpdate == "") {
+		// Cache wurde geleert / App neu gestartet
+		var currentDate = new Date();
+		setVars("cacheupdate", currentDate.toLocaleString());
+	}
+		
+</script>
+</body>
+</html>
