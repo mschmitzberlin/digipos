@@ -16,10 +16,9 @@
 					<li id="navSonstiges"><a data-toggle="tab" href="#mainmenuesonstiges">Sonstiges</a></li>
 				</ul>
 				<button id="btnLogout" type="button" class="navbar-right btn btn-default navbar-btn">Abmelden</button>
-				<span  class="navbar-text navbar-right username">Angemeldet: <span id="currentUserName"></span></span>
+				<span  class="navbar-text navbar-right username">Angemeldet: <span>{{userService.user.fullname}}</span></span>
 			</div>
 		</nav>
-            
   <div class="tab-content">
         <router-outlet></router-outlet>
   </div>
