@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
 
-import { Globals } from './globals';
+//import { Globals } from './globals';
 
 @Injectable()
 export class GlobalsService {
-  globals: Globals;
   
-  constructor() {
-    this.globals = new Globals();
+  public globals: {
+  formid: '',
+    tourid: '',
+    customid: '',
+    session: string;
+    grossonr: string;
+    filnr: string;
+    localVersion: string;
+    serverVersion: string;
   }
   
+  //constructor(globals = Globals) {
+  //  //this.globals = new Globals();
+  //}
+  //
   setGlobals(identifier, value) {
     console.log('globals');
     console.log(this.globals);

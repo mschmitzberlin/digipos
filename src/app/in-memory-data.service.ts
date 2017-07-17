@@ -24,7 +24,20 @@ export class InMemoryDataService implements InMemoryDbService {
         version: 'Version: 10.10.17 111'
         }
     ];
-    return {users, params};
+    const touren = [
+      {
+        tourid :'16330',
+        tournr :'',
+        name :​ '(mba)​ zusammengestellt 20.04.2017, Distanz:​ 0 km, 4 Besuche'
+      },
+      {
+        tourid :'17376',
+        tournr :'​5174​',
+        name:​ '(mba)​ Tour 5174 03.07.2017, Distanz:​ 45.385 km, 25 Besuche'
+        
+      }
+    ];
+    return {users, params, touren};
   }
   
   
